@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.fj</groupId>
+    <artifactId>gen-code</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+
+  <artifactId>gen-admin</artifactId>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.github.fvarrui</groupId>
+        <artifactId>javapackager</artifactId>
+        <version>1.6.6</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>package</goal>
+            </goals>
+            <configuration>
+              <!-- 启动类 -->
+              <mainClass>com.fj.App</mainClass>
+              <!-- 绑定自定义JRE路径-->
+              <bundleJre>true</bundleJre>
+              <jrePath>F:\run\jdk\jre</jrePath>
+              <generateInstaller>true</generateInstaller>
+              <administratorRequired>false</administratorRequired>
+              <!-- 操作系统-->
+              <platform>windows</platform>
+              <copyDependencies>true</copyDependencies>
+              <!-- 名称与版本-->
+              <displayName>GenCode</displayName>
+              <name>GenCode</name>
+              <version>1.0</version>
+              <!-- 手动引入额外资源-->
+              <!--<additionalResources>-->
+              <!--  <additionalResource>D:\Item\GD_AmtHardwareTest1.0\datas</additionalResource>-->
+              <!--  <additionalResource>D:\Item\GD_AmtHardwareTest1.0\lib</additionalResource>-->
+              <!--</additionalResources>-->
+              <!--详细参数配置-->
+              <winConfig>
+                <icoFile>C:\Users\fjding\Desktop\test\favicon.ico</icoFile>
+                <generateSetup>false</generateSetup>
+                <generateMsi>false</generateMsi>
+                <generateMsm>false</generateMsm>
+              </winConfig>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
