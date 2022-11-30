@@ -1,4 +1,4 @@
-package com.fj;
+package com.fj.ui;
 
 import cn.hutool.core.util.StrUtil;
 import javafx.collections.ObservableList;

@@ -1,4 +1,4 @@
-package com.fj;
+package com.fj.ui;
 
 import javafx.application.Application;
 import javafx.beans.property.ReadOnlyObjectWrapper;

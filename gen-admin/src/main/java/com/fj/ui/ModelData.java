@@ -1,4 +1,4 @@
-package com.fj;
+package com.fj.ui;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
