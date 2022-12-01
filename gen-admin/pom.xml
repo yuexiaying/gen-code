@@ -12,6 +12,17 @@
 
   <artifactId>gen-admin</artifactId>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>easyexcel</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
       <plugin>
@@ -46,7 +57,7 @@
               <!--</additionalResources>-->
               <!--详细参数配置-->
               <winConfig>
-                <icoFile>C:\Users\fjding\Desktop\test\favicon.ico</icoFile>
+                <icoFile>E:\笔记\source\资源\favicon.ico</icoFile>
                 <generateSetup>false</generateSetup>
                 <generateMsi>false</generateMsi>
                 <generateMsm>false</generateMsm>

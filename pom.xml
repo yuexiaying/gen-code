@@ -20,6 +20,7 @@
     <hutool.version>5.8.2</hutool.version>
     <lombok.verson>1.18.24</lombok.verson>
     <easyexcel.verson>3.0.1</easyexcel.verson>
+    <freemarker.verson>2.3.23</freemarker.verson>
   </properties>
 
   <dependencyManagement>
@@ -28,6 +29,12 @@
         <groupId>com.alibaba</groupId>
         <artifactId>easyexcel</artifactId>
         <version>${easyexcel.verson}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.freemarker</groupId>
+        <artifactId>freemarker</artifactId>
+        <version>${freemarker.verson}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
