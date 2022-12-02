@@ -1,5 +1,8 @@
 package com.fj;
 
+import com.alibaba.excel.EasyExcel;
+import com.fj.gen.std.StdData;
+import com.fj.gen.std.StdReadListener;
 import com.fj.ui.AddStage;
 import com.fj.ui.ConfigUtils;
 import com.fj.ui.ModelData;
@@ -85,7 +88,7 @@ public class App extends Application {
         selectColumn.setCellFactory(new Callback<TableColumn<ModelData, ModelData>, TableCell<ModelData, ModelData>>() {
             @Override
             public TableCell<ModelData, ModelData> call(TableColumn<ModelData, ModelData> param) {
-                return new MyCell();
+                return new SelectCell();
             }
         });
         selectColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModelData,ModelData>, ObservableValue<ModelData>>() {
@@ -101,7 +104,14 @@ public class App extends Application {
         doColumn.setCellFactory(new Callback<TableColumn<ModelData, ModelData>, TableCell<ModelData, ModelData>>() {
             @Override
             public TableCell<ModelData, ModelData> call(TableColumn<ModelData, ModelData> param) {
-                return new MyCell();
+                return new DoCell();
+            }
+        });
+        doColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ModelData,ModelData>, ObservableValue<ModelData>>() {
+
+            @Override
+            public ObservableValue<ModelData> call(TableColumn.CellDataFeatures<ModelData, ModelData> data) {
+                return new ReadOnlyObjectWrapper<>(data.getValue());
             }
         });
 
@@ -124,7 +134,7 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    private class MyCell extends TableCell<ModelData,ModelData> {
+    private class SelectCell extends TableCell<ModelData,ModelData> {
         @Override
         protected void updateItem(ModelData item, boolean empty) {
             super.updateItem(item, empty);
@@ -142,6 +152,36 @@ public class App extends Application {
                 setGraphic(checkBox);
             }
         }
+    }
+
+    private class DoCell extends TableCell<ModelData,ModelData> {
+        Alert alert;
+        public DoCell() {
+             alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("生成中");
+            alert.setContentText("生成。。。");
+            ((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/image/2.png"));
+        }
+
+        @Override
+        protected void updateItem(ModelData item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null){
+                setGraphic(null);
+            }else {
+                Button button = new Button("生成");
+                button.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        alert.show();
+                        EasyExcel.read(item.getPath()).head(StdData.class).registerReadListener(new StdReadListener(item)).doReadAll();
+                        alert.close();
+                    }
+                });
+                setGraphic(button);
+            }
+        }
+
     }
 
 }

@@ -54,7 +54,7 @@ public class StdReadListener implements ReadListener<StdData> {
     }
 
     private String getOutName(String pkg,String tableName){
-        String path = modelData.getPath() +"/" + pkg.replace(".","/")+"/";
+        String path =  new File(modelData.getPath()).getParent() +"/" + pkg.replace(".","/")+"/";
         File file = new File(path);
         if (!file.exists()){
             file.mkdirs();
@@ -72,7 +72,6 @@ public class StdReadListener implements ReadListener<StdData> {
         GenData genData = new GenData();
         genData.setDataList(values);
         genData.setLombok(values.get(0).getLombok());
-        // todo 待加跟路径
         genData.setPkg(modelData.getPkg() + "." + values.get(0).getSubPkg());
         genData.setTableMsg(values.get(0).getTableMsg());
         genData.setTableName(values.get(0).getTableName());

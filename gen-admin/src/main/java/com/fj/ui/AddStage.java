@@ -100,7 +100,7 @@ public class AddStage {
         gridPane.add(authorText, 0, 2);
         gridPane.add(authorTextField, 1, 2);
 
-        Text pathText = new Text("生成路径");
+        Text pathText = new Text("文件路径");
         TextField pathTextField = new TextField();
         map.put(T_PATH, pathTextField);
         gridPane.add(pathText, 0, 3);
@@ -163,6 +163,10 @@ public class AddStage {
         for (String key : map.keySet()) {
             if (StrUtil.isEmpty(map.get(key).getText())) {
                 alert(key + "不能为空！");
+                return false;
+            }
+            if (T_PATH.equals(key) && !StrUtil.endWith(map.get(T_PATH).getText(),".xlsx")){
+                alert(key + "必须是xlsx文件");
                 return false;
             }
         }
