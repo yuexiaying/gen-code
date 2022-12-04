@@ -10,14 +10,13 @@ import com.fj.ui.ModelData;
 public class Test {
 
     public static void main(String[] args) {
-        String fileName = "C:\\Users\\fjding\\Desktop\\test\\gen\\test.xlsx";
         ModelData modelData = ModelData.builder()
                 .name("test")
                 .pkg("com.fj")
                 .author("fjding")
-                .path("C:\\Users\\fjding\\Desktop\\test\\gen")
+                .path("C:\\Users\\fjding\\Desktop\\test\\gen\\test.xlsx")
                 .build();
 
-        EasyExcel.read(fileName).head(StdData.class).registerReadListener(new StdReadListener(modelData)).doReadAll();
+        EasyExcel.read(modelData.getPath()).head(StdData.class).registerReadListener(new StdReadListener(modelData)).doReadAll();
     }
 }

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +38,6 @@ public class ClassModel {
     /**
      * 子类
      */
-    private List<ClassModel> subClassList;
+    private List<ClassModel> subClassList = new ArrayList<>();
 
 }

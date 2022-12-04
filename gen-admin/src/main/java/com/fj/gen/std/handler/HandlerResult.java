@@ -1,7 +1,7 @@
 package com.fj.gen.std.handler;
 
-import cn.hutool.core.map.TableMap;
 import com.fj.gen.std.StdData;
+import com.fj.ui.Table;
 import lombok.Data;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class HandlerResult {
 
     private List<StdData> list;
 
-    private TableMap<String,ClassModel> tableMap;
+    private Table<String,ClassModel> modelTable;
 
 
 }

@@ -36,6 +36,9 @@ public class StdData {
     @ExcelProperty("子类名")
     private String subTableName;
 
+    /**
+     * true 或者 false
+     */
     @ExcelProperty("内部类")
     private String subClass;
 

@@ -45,8 +45,8 @@ public class StdReadListener implements ReadListener<StdData> {
         GenExecutes genExecutes = new GenExecutes();
         Executes instance = Executes.getInstance();
         HandlerResult result = instance.exec(list);
-        for (String key : result.getTableMap().keySet()) {
-            List<ClassModel> values = result.getTableMap().getValues(key);
+        for (String key : result.getModelTable().getKeys()) {
+            List<ClassModel> values = result.getModelTable().getValues(key);
             GenData genData = getGenData(values);
             genExecutes.process(Constants.STD_ENTITY_FTL,  getOutName(genData.getPkg(),genData.getTableName()), genData);
         }
