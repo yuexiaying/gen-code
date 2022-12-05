@@ -1,7 +1,7 @@
 package com.fj.gen.std.handler;
 
 import com.fj.gen.std.StdData;
-import com.fj.ui.Table;
+import com.fj.gen.Table;
 import lombok.Data;
 
 import java.util.List;

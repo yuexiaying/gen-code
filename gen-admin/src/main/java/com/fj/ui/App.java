@@ -1,11 +1,8 @@
-package com.fj;
+package com.fj.ui;
 
 import com.alibaba.excel.EasyExcel;
 import com.fj.gen.std.StdData;
 import com.fj.gen.std.StdReadListener;
-import com.fj.ui.AddStage;
-import com.fj.ui.ConfigUtils;
-import com.fj.ui.ModelData;
 import javafx.application.Application;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
@@ -36,9 +33,6 @@ import java.util.stream.Collectors;
  * @date 2022/11/10
  */
 public class App extends Application {
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     AddStage addStage;
 

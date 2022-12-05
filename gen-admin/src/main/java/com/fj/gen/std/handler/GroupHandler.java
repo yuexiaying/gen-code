@@ -4,7 +4,7 @@ import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fj.gen.std.Constants;
 import com.fj.gen.std.StdData;
-import com.fj.ui.Table;
+import com.fj.gen.Table;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.fj.ui;
+package com.fj.gen;
 
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.map.TableMap;
