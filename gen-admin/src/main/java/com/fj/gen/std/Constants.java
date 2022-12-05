@@ -12,6 +12,10 @@ public final class Constants {
 
     public static final String FALSE = "false";
 
+    public static final String OBJECT = "Object";
+
+    public static final String LIST = "List";
+
     /**
      * 标准实体模板文件
      */

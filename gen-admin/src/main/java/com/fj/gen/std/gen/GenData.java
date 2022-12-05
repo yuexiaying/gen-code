@@ -3,6 +3,7 @@ package com.fj.gen.std.gen;
 import com.fj.gen.std.handler.ClassModel;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -34,5 +35,7 @@ public class GenData {
     private String author;
 
     private Date date = new Date();
+
+    private List<GenData> subGenDataList = new ArrayList<>();
 
 }

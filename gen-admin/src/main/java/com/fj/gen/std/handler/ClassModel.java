@@ -38,6 +38,7 @@ public class ClassModel {
     /**
      * 子类
      */
+    @Builder.Default
     private List<ClassModel> subClassList = new ArrayList<>();
 
 }

@@ -80,6 +80,18 @@ public class StdReadListener implements ReadListener<StdData> {
         values.forEach(e -> typeSet.add(e.getType()));
         genData.setTypeSet(typeSet);
         genData.setAuthor(modelData.getAuthor());
+        // 子类赋值
+        for (ClassModel classModel : values) {
+            List<ClassModel> subClassList = classModel.getSubClassList();
+            if (!subClassList.isEmpty()){
+                GenData subGenData = new GenData();
+                subGenData.setDataList(subClassList);
+                subGenData.setLombok(subClassList.get(0).getLombok());
+                subGenData.setTableMsg(subClassList.get(0).getTableMsg());
+                subGenData.setTableName(subClassList.get(0).getTableName());
+                genData.getSubGenDataList().add(subGenData);
+            }
+        }
         return genData;
     }
 }

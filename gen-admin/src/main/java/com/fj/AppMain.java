@@ -1,9 +1,7 @@
 package com.fj;
 
-import com.alibaba.excel.EasyExcel;
-import com.fj.gen.std.StdData;
-import com.fj.gen.std.StdReadListener;
-import com.fj.ui.ModelData;
+import com.fj.ui.App;
+import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,20 +14,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AppMain {
 
-    //public static void main(String[] args) {
-    //    SpringApplication.run(AppMain.class, args);
-    //    Application.launch(App.class, args);
-    //}
-
     public static void main(String[] args) {
-        SpringApplication.run(AppMain.class,args);
-        ModelData modelData = ModelData.builder()
-                .name("test")
-                .pkg("com.fj")
-                .author("fjding")
-                .path("C:\\Users\\fjding\\Desktop\\test\\gen\\test.xlsx")
-                .build();
-
-        EasyExcel.read(modelData.getPath()).head(StdData.class).registerReadListener(new StdReadListener(modelData)).doReadAll();
+        SpringApplication.run(AppMain.class, args);
+        Application.launch(App.class, args);
     }
+
 }

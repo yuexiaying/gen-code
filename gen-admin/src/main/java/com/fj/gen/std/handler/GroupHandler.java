@@ -33,9 +33,7 @@ public class GroupHandler implements DataHandler {
 
         for (StdData stdData : list) {
             String order = stdData.getOrder();
-            if (subClassList.contains(stdData.getType())) {
-                stdDataMap.put(order, stdData);
-            }
+
             ClassModel classModel = ClassModel.builder()
                     .subPkg(stdData.getSubPkg())
                     .tableName(stdData.getTableName())
@@ -46,18 +44,22 @@ public class GroupHandler implements DataHandler {
                     .type(stdData.getType())
                     .lombok(StrUtil.isEmpty(stdData.getLombok()) ? Constants.TRUE : stdData.getLombok())
                     .build();
+            if (subClassList.contains(stdData.getType())) {
+                stdDataMap.put(order, stdData);
+                classModel.setType(getSubType(stdData));
+            }
             // 判断是一级类，还是子类
             if (order.contains(".")) {
                 String subKey = StrUtil.sub(order, 0, StrUtil.lastIndexOfIgnoreCase(order, "."));
+                StdData paStdData = stdDataMap.get(subKey);
+                String subClassName = getSubClassName(paStdData);
+                classModel.setTableName(subClassName);
+                classModel.setTableMsg(paStdData.getFiledMsg());
                 // 判断是内部类
                 if (Constants.TRUE.equals(stdData.getSubClass())) {
                     ClassModel paClassModel = modelTable.get(subKey);
                     paClassModel.getSubClassList().add(classModel);
                 } else {
-                    StdData paStdData = stdDataMap.get(subKey);
-                    String subClassName = getSubClassName(paStdData);
-                    classModel.setTableName(subClassName);
-                    classModel.setTableMsg(paStdData.getFiledMsg());
                     modelTable.add(subClassName, classModel.getOrder(), classModel);
                 }
             } else {
@@ -69,12 +71,27 @@ public class GroupHandler implements DataHandler {
         return false;
     }
 
+    private String getSubType(StdData stdData){
+        String subClassName = getSubClassName(stdData);
+        if (Constants.OBJECT.equals(stdData.getType())){
+            return subClassName;
+        }
+        if (Constants.LIST.equals(stdData.getType())){
+            return "List<"+subClassName+">";
+        }
+        return null;
+    }
+
     private String getSubClassName(StdData stdData) {
         if (StrUtil.isNotEmpty(stdData.getSubTableName())) {
             return stdData.getSubTableName();
         }
+        String type = stdData.getFiledName();
+        if (Constants.LIST.equals(stdData.getType())){
+           type= stdData.getFiledName().replace("List","").replace("Array","");
+        }
         // todo 去除 s List Array 等
-        return StrUtil.upperFirst(stdData.getFiledName());
+        return StrUtil.upperFirst(type);
     }
 
     @Override
