@@ -1,5 +1,6 @@
 package com.fj.gen.std;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
@@ -11,10 +12,7 @@ import com.fj.gen.std.handler.HandlerResult;
 import com.fj.ui.ModelData;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author fjding
@@ -47,6 +45,7 @@ public class StdReadListener implements ReadListener<StdData> {
         HandlerResult result = instance.exec(list);
         for (String key : result.getModelTable().getKeys()) {
             List<ClassModel> values = result.getModelTable().getValues(key);
+            values.sort((e1,e2) ->Integer.valueOf(e1.getOrder().replace(".","")) - Integer.valueOf(e2.getOrder().replace(".","")));
             GenData genData = getGenData(values);
             genExecutes.process(Constants.STD_ENTITY_FTL,  getOutName(genData.getPkg(),genData.getTableName()), genData);
         }
@@ -72,7 +71,7 @@ public class StdReadListener implements ReadListener<StdData> {
         GenData genData = new GenData();
         genData.setDataList(values);
         genData.setLombok(values.get(0).getLombok());
-        genData.setPkg(modelData.getPkg() + "." + values.get(0).getSubPkg());
+        genData.setPkg(modelData.getPkg() +(ObjectUtil.isEmpty(values.get(0).getSubPkg()) ? "" :"." + values.get(0).getSubPkg()));
         genData.setTableMsg(values.get(0).getTableMsg());
         genData.setTableName(values.get(0).getTableName());
         Set<String> typeSet = new HashSet<>();
