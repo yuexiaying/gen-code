@@ -2,9 +2,9 @@ package com.fj.gen.std.handler;
 
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.StrUtil;
+import com.fj.gen.Table;
 import com.fj.gen.std.Constants;
 import com.fj.gen.std.StdData;
-import com.fj.gen.Table;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +35,7 @@ public class GroupHandler implements DataHandler {
             String order = stdData.getOrder();
 
             ClassModel classModel = ClassModel.builder()
+                    // 子类名允许为空
                     .subPkg(stdData.getSubPkg())
                     .tableName(stdData.getTableName())
                     .tableMsg(stdData.getTableMsg())
@@ -51,6 +52,7 @@ public class GroupHandler implements DataHandler {
             // 判断是一级类，还是子类
             if (order.contains(".")) {
                 String subKey = StrUtil.sub(order, 0, StrUtil.lastIndexOfIgnoreCase(order, "."));
+                // 获得父类
                 StdData paStdData = stdDataMap.get(subKey);
                 String subClassName = getSubClassName(paStdData);
                 classModel.setTableName(subClassName);
