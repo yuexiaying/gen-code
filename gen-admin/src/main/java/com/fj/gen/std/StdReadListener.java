@@ -1,5 +1,6 @@
 package com.fj.gen.std;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.context.AnalysisContext;
@@ -12,7 +13,10 @@ import com.fj.gen.std.handler.HandlerResult;
 import com.fj.ui.ModelData;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author fjding
@@ -30,6 +34,10 @@ public class StdReadListener implements ReadListener<StdData> {
 
     @Override
     public void invoke(StdData data, AnalysisContext context) {
+        if (CharSequenceUtil.isBlank(data.getFiledName())){
+            return;
+        }
+        data.setOrder(CharSequenceUtil.trim(data.getOrder()));
         list.add(data);
     }
 
